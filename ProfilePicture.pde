@@ -3,10 +3,11 @@
 //    blob/master/01_P/P_4_3_2_01/P_4_3_2_01.pde
 // Licensed under the Apache License, Version 2.0
 
+int counter = -1;
 PFont font;
 PImage img;
 boolean showOriginal = false;
-float cellSize = 5;
+float cellSize = 20;
 float scale = 2;
 int imgWidth = 462;
 int imgHeight = 347;
@@ -35,16 +36,16 @@ void draw() {
     // start both of these loops at 0.
     // one should run while its variable is less than imgHeight,
     // and the other should run while its variable is less than imgWidth
-    for(int y = ___; _________; y += cellSize) {
-      for(int x = ___; _________; x += cellSize) { 
+    for(int y = 0; y <= 345; y += cellSize) {
+      for(int x = 0; x <= 505; x += cellSize) { 
         color c = img.pixels[y*imgWidth+x];
         int greyness = round(red(c) * 0.222 + green(c) * 0.707 + blue(c) * 0.071);
         fill(c);
         float xLoc = x * scale;
         float yLoc = y * scale;
-        float size = cellSize * scale;
+        float size = cellSize * scale * .8;
         // draw an ellipse at xLoc, yLoc, using 'size' for width and height
-        _________________________;
+        ellipse(xLoc, yLoc, size, size);
 
       }
     }
@@ -53,7 +54,13 @@ void draw() {
 
 void keyPressed() {
   if (key == ' ') {
-    showOriginal = !showOriginal;
+    cellSize += counter;
+    if (cellSize < 3){
+      counter = 1;
+    }
+    else if (cellSize > 30){
+      counter = -1;
+    }
     redraw();
   }
 }  
